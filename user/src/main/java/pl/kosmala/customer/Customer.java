@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Data
 @Builder
@@ -25,7 +26,7 @@ public class Customer
                     strategy = GenerationType.SEQUENCE,
                     generator = "customer_id_sequence"
             )
-    private Integer id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;

@@ -2,6 +2,8 @@ package pl.kosmala.customer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ICustomerRepository extends JpaRepository<Customer, Integer>
+import java.util.UUID;
+
+public interface ICustomerRepository extends JpaRepository<Customer, Long>
 {
 }

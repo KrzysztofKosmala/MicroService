@@ -1,15 +1,15 @@
 server:
-  port: 8081
+  port: 8082
 spring:
   application:
     name: customer
   datasource:
-    password: 'password'
-    url: jdbc:mysql://localhost:3306/microservice?useSSL=false
-    username: 'root'
+    password: password
+    url: jdbc:postgresql://localhost:50/customer
+    username: kosmala
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
