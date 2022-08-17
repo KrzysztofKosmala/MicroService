@@ -17,6 +17,9 @@ public class CustomerService implements ICustomerService
                 .email(userRequest.email())
                 .build();
         //todo:
-        iCustomerRepository.save(user);
+        if(!iCustomerRepository.customerExistsByEmail(user.getEmail()))
+            iCustomerRepository.save(user);
+        else
+            throw new CustomerAlreadyExistsInDatabaseException(String.format("Email: %s already exists in database", user.getEmail()));
     }
 }

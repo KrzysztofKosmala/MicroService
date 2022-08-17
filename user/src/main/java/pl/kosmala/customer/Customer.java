@@ -16,18 +16,29 @@ import java.util.UUID;
 public class Customer
 {
     @Id
-    @SequenceGenerator
-            (
-                    name = "customer_id_sequence",
-                    sequenceName = "customer_id_sequence"
-            )
-    @GeneratedValue
-            (
-                    strategy = GenerationType.SEQUENCE,
-                    generator = "customer_id_sequence"
-            )
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
+    @Column
+            (
+                    name = "first_name",
+                    nullable = false,
+                    columnDefinition = "TEXT"
+            )
     private String firstName;
+    @Column
+            (
+                    name = "last_name",
+                    nullable = false,
+                    columnDefinition = "TEXT"
+            )
     private String lastName;
+    @Column
+            (
+                    name = "email",
+                    nullable = false,
+                    columnDefinition = "TEXT",
+                    unique = true
+            )
     private String email;
 }
