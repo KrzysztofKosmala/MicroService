@@ -1,0 +1,28 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: customer
+  datasource:
+    password: password
+    url: jdbc:postgresql://localhost:50/customer
+    username: kosmala
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+logging:
+  level:
+    root: ERROR
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+      fetch-registry: true
+      register-with-eureka: true
