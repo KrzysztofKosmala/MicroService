@@ -11,10 +11,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @DataJpaTest
 class ICustomerRepositoryTest
 {
+
     @Autowired
     ICustomerRepository underTest;
-    @Autowired
-    Faker faker;
+
+
+    Faker faker = new Faker();
+
 
 
     String EMAIL_REGEX = "@gmail.com";

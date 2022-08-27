@@ -15,3 +15,8 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
+logging:
+  level:
+    root: ERROR
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
