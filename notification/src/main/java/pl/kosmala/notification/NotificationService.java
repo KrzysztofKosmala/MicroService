@@ -21,7 +21,6 @@ public class NotificationService
                 .message(notificationRequest.message())
                 .sentAt(LocalDateTime.now())
                 .sender("admin")
-                //notification request
                 .build();
         notificationRepository.save(notification);
     }
