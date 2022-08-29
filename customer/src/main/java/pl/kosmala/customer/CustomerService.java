@@ -1,17 +1,27 @@
 package pl.kosmala.customer;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import pl.kosmala.fraud.FraudCheckResponse;
+import pl.kosmala.clients.fraud.FraudCheckResponse;
+import pl.kosmala.clients.fraud.FraudClient;
+import pl.kosmala.clients.notification.NotificationClient;
+import pl.kosmala.clients.notification.NotificationRequest;
 
 @Service
 @AllArgsConstructor
 public class CustomerService implements ICustomerService
 {
 
-    private RestTemplate restTemplate;
     ICustomerRepository iCustomerRepository;
+
+    private final FraudClient fraudClient;
+
+    private final NotificationClient notificationClient;
+
     public void registerCustomer(CustomerRegistrationRequest userRequest)
     {
         Customer customer = Customer.builder()
@@ -21,17 +31,21 @@ public class CustomerService implements ICustomerService
                 .build();
         //todo: check if froadster
 
-
-
         if(iCustomerRepository.customerExistsByEmail(customer.getEmail()))
             throw new CustomerAlreadyExistsInDatabaseException(String.format("Email: %s already exists in database", customer.getEmail()));
         else
             iCustomerRepository.saveAndFlush(customer);
 
-        FraudCheckResponse fraudCheckResponse = restTemplate.getForObject("http://FRAUD/api/v1/fraud-check/{customerId}", FraudCheckResponse.class, customer.getId());
+        FraudCheckResponse fraudCheckResponse = fraudClient.isFraudster(customer.getId());
         assert fraudCheckResponse != null;
         if(fraudCheckResponse.isFraudster())
+        {
             throw new FraudsterFoundException("Fraudster!");
+        }
+
+        //todo: send notification
+
+        notificationClient.sendNotification(new NotificationRequest(customer.getId(), customer.getEmail(), "test"));
 
     }
 }

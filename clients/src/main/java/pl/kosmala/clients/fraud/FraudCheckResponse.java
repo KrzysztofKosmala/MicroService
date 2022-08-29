@@ -1,4 +1,4 @@
-package pl.kosmala.fraud;
+package pl.kosmala.clients.fraud;
 
 public record FraudCheckResponse(boolean isFraudster)
 {

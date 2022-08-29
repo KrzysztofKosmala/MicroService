@@ -2,6 +2,7 @@ package pl.kosmala.fraud;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import pl.kosmala.clients.fraud.FraudCheckResponse;
 
 @RestController
 @RequestMapping("api/v1/fraud-check")
