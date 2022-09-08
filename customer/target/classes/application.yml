@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: customer
+    zipkin:
+      base-url: http://localhost:9411
   datasource:
     password: password
     url: jdbc:postgresql://localhost:50/customer
@@ -15,11 +17,7 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
-logging:
-  level:
-    root: ERROR
-    org.springframework.web: ERROR
-    org.hibernate: ERROR
+
 eureka:
   client:
     service-url:
