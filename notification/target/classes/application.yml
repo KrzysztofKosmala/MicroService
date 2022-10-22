@@ -5,6 +5,8 @@ spring:
     name: notification
     zipkin:
       base-url: http://localhost:9411
+    rabbitmq:
+      addresses: localhost:5672
   datasource:
     password: password
     url: jdbc:postgresql://localhost:50/notification
@@ -18,9 +20,17 @@ spring:
         format_sql: true
     show-sql: true
 
-    eureka:
-      client:
+eureka:
+    client:
         service-url:
           defaultZone: http://localhost:8761/eureka
-          fetch-registry: true
-          register-with-eureka: true
+        fetch-registry: true
+        register-with-eureka: true
+
+rabbitmq:
+    exchanges:
+        internal: internal.exchange
+    queue:
+        notification: notification.queue
+    routing-keys:
+        internal-notification: internal.notification.routing-key

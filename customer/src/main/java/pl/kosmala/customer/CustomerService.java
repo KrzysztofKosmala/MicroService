@@ -1,11 +1,7 @@
 package pl.kosmala.customer;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import pl.kosmala.clients.fraud.FraudCheckResponse;
 import pl.kosmala.clients.fraud.FraudClient;
 import pl.kosmala.clients.notification.NotificationClient;
